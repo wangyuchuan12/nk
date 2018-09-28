@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.UserReport">
+
+  <!--SunJiaJian-->
+  <!--<sql id="SELECT_CONDITION_INNER">-->
+    <!--<if test="_condition.userId != null">-->
+      <!--and user.id in-->
+      <!--(select user_id from uc_role_user where role_id = #{_condition.roleId,jdbcType=NUMERIC})-->
+    <!--</if>-->
+    <!--<if test="_condition.groupId != null">-->
+      <!--and user.id in-->
+      <!--(select user_id from uc_group_user where user_id = #{_condition.groupId,jdbcType=NUMERIC})-->
+    <!--</if>-->
+  <!--</sql>-->
+
+</mapper>

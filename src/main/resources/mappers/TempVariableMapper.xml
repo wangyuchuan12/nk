@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.TempVariable">
+
+    <!--SunJiaJian-->
+    <select id="findByProcessId" parameterType="java.lang.Long" resultType="com.ifrabbit.nk.express.domain.TempVariable">
+        select * from temp_variable where process_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <update id="updateVariable" parameterType="com.ifrabbit.nk.express.domain.TempVariable">
+        UPDATE temp_variable
+        <set>
+            <if test="variable.t_key != null" >
+                t_key = #{variable.t_key,jdbcType=VARCHAR},
+            </if>
+            <if test="variable.t_value != null" >
+                t_value = #{variable.t_value,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where process_id = #{variable.processId,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteVariable" parameterType="java.lang.Long">
+        delete from temp_variable where process_id = #{phoneNumber,jdbcType=BIGINT}
+    </delete>
+</mapper>

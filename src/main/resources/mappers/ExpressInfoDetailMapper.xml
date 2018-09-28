@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.ExpressInfoDetail">
+
+    <!--SunJiaJian-->
+    <select id="findExpressNumber" parameterType="java.lang.String" resultType="com.ifrabbit.nk.express.domain.ExpressInfoDetail">
+        select * from ex_info_detail where express_number = #{expressNumber,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteExpressNumber" parameterType="java.lang.String">
+        delete from ex_info_detail where express_number = #{expressNumber,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

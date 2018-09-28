@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.JobList">
+
+    <!--<sql id="SELECT_CONDITION_INNER">-->
+        <!--<if test="_condition.fuzzyExpressNumber!= null">-->
+            <!--and `jobList.problem`.problemparts_expressnumber like concat('%',#{_condition.fuzzyExpressNumber},'%')-->
+        <!--</if>-->
+        <!--<if test="_condition.fuzzyExpressType!= null">-->
+            <!--and `jobList.problem`.problemparts_type like concat('%',#{_condition.fuzzyExpressType},'%')-->
+        <!--</if>-->
+    <!--</sql>-->
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.AppProblemparts">
+
+    <select id="finduflotaskByParams"
+            parameterType="map"
+            resultType="map">
+
+    SELECT ut.ID_,ut.NODE_NAME_,ut.ASSIGNEE_,ut.BUSINESS_ID_,pr.problemparts_receivephone,pr.problemparts_sendphone,pr.problemparts_type,pr.problemparts_insideitem,
+      pr.problemparts_receivename,pr.problemparts_sendname,pr.problemparts_expressnumber,ut.PROCESS_INSTANCE_ID_,deal.appdeal_id,deal.appdeal_dealtype,
+      deal.appdeal_dealcreatedate,deal.appdeal_dealenddate,pr.problemparts_callrecipientscount, pr.problemparts_uncollecteddays,pr.problemparts_callcompanycount,
+        pr.problemparts_dutystate,pr.problemparts_obtainstate,pr.problemparts_callsendercount,pr.problemparts_expresstype
+     FROM UFLO_TASK ut,tapp_problemparts pr,tapp_tabdealinfo deal WHERE  ut.BUSINESS_ID_=pr.problemparts_id
+      AND pr.problemparts_id=deal.appdeal_tabid
+      AND (STATE_ ='Created' OR STATE_ ='Ready') AND deal.appdeal_dealstate=0  AND NOW() > deal.appdeal_dealcreatedate  AND ASSIGNEE_=#{params.name} AND deal.appdeal_dealtype!=0
+        <if test="params.ip != null and params.ip !=''">
+            AND  deal.appdeal_varparama = #{params.ip,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+</mapper>

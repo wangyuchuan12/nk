@@ -1,0 +1,59 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        encoders are assigned the type
+        ch.qos.logback.classic.encoder.PatternLayoutEncoder by default
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/nk/debug/nk.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/nk/debug/nk-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/nk/error/nk.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/nk/error/nk-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="jndi" level="WARN" />
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.eclipse.jetty" level="WARN" />
+    <logger name="org.hibernate" level="WARN" />
+    <logger name="com.zaxxer.hikari" level="WARN" />
+    <logger name="org.apache.commons" level="WARN" />
+    <logger name="org.apache.shiro" level="WARN" />
+    <logger name="org.apache.tiles" level="WARN" />
+    <logger name="org.jboss.logging" level="WARN" />
+    <logger name="com.alibaba.druid" level="WARN" />
+
+    <!-- <root level="debug">
+         <appender-ref ref="STDOUT" />
+     </root> -->
+
+    <root level="DEBUG">
+        <appender-ref ref="DEBUG_FILE" />
+    </root>
+
+    <root level="ERROR">
+        <appender-ref ref="ERROR_FILE" />
+    </root>
+</configuration>

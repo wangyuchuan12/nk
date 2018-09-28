@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.TmanageBalance">
+
+    <!--SunJiaJian-->
+    <select id="search"  parameterType="java.lang.String" resultType="java.lang.String">
+        select balance_companyname from tmanage_balance where balance_companyname like CONCAT('%',#{str},'%')
+    </select>
+
+
+    <select id="findBalanceByParams"
+            parameterType="map"
+            resultType="map">
+        select
+        balance_companyname as companyname,
+        balance_date as date,
+        balance_tabid as tabid,
+        balance_amount as amout,
+        balance_payee as payee,
+        balance_memo as memo
+        from
+        tmanage_balance
+        where
+        balance_companyname = #{params.balance_companyname}
+        and balance_date
+        between #{params.beginTime}
+        and #{params.endTime}
+        <!--<trim suffix="where" suffixOverrides="and">-->
+            <!--<if test="balance_companyname != null and balance_companyname !='' ">-->
+                <!--and balance_companyname = #{params.balance_companyname}-->
+            <!--</if>-->
+            <!--<if test="beginTime!=null and endTime!=null">-->
+                <!--balance_date-->
+                <!--between #{params.beginTime}-->
+                <!--and #{params.endTime}-->
+            <!--</if>-->
+        <!--</trim>-->
+    </select>
+</mapper>

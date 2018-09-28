@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.Problem">
+
+
+    <select id="findByNumber" parameterType="java.lang.Long" resultType="com.ifrabbit.nk.express.domain.Problem">
+        SELECT * from tapp_problemparts where problemparts_id = #{number,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByNumber" parameterType="java.lang.Long">
+        DELETE from tapp_problemparts where problemparts_expressnumber = #{number,jdbcType=BIGINT}
+    </delete>
+
+    <select id="findCountNum"  resultType="map" parameterType="int">
+        select problemparts_type as types ,count(*) as counts from tapp_problemparts where problemparts_staffid=#{str}  group by problemparts_type
+    </select>
+
+
+    <select id="findCountByDay"  resultType="map" parameterType="map">
+        select problemparts_type as types ,count(*) as counts
+        from tapp_problemparts
+        where problemparts_staffid=#{params.staffId} and problemparts_createdate like CONCAT('%',#{params.createTime},'%')
+        group by problemparts_type
+    </select>
+
+
+    <select id="findCountByDayTime"  resultType="map" parameterType="int">
+        SELECT
+        problemparts_createdate as time,
+        count(*) as counts
+        FROM
+        (
+        SELECT
+        CASE
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 09:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 10:00:00') THEN '09:00-10:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 10:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 11:00:00') THEN '10:00-11:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 11:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 12:00:00') THEN '11:00-12:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 12:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 13:00:00') THEN '12:00-13:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 13:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 14:00:00') THEN '13:00-14:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 14:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 15:00:00') THEN '14:00-15:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 15:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 16:00:00') THEN '15:00-16:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 16:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 17:00:00') THEN '16:00-17:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 17:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 18:00:00') THEN '17:00-18:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 18:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 19:00:00') THEN '18:00-19:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 19:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 20:00:00') THEN '19:00-20:00'
+        WHEN problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 20:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 21:00:00') THEN '20:00-21:00'
+        END AS problemparts_createdate
+        FROM tapp_problemparts
+        WHERE problemparts_createdate>DATE_FORMAT(sysdate(),'%Y-%m-%d 09:00:00') AND problemparts_createdate&lt;DATE_FORMAT(sysdate(),'%Y-%m-%d 21:00:00') AND problemparts_staffid=#{str}
+        ) t
+        GROUP BY
+        problemparts_createdate
+    </select>
+
+
+    <select id="findCountByDayMonth"  resultType="map" parameterType="int">
+       select count(*) as counts ,substr(t.problemparts_createdate,1,10) as time from tapp_problemparts t where
+       t.problemparts_createdate like DATE_FORMAT(sysdate(),'%Y-%m%')
+       and problemparts_staffid=#{str} group by substr(t.problemparts_createdate,1,10)
+    </select>
+
+
+</mapper>

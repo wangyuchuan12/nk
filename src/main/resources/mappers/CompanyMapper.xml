@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.Company">
+
+ <!--<select id="countCompanyWaybill" resultType="com.ifrabbit.nkexpress.domain.Company">
+   select company_id as id,count(*) as waybillCount from ex_waybill group by company_id
+   having company_id in
+   <foreach collection="customerIds" separator="," open="(" close=")" item="id">
+     #{id}
+   </foreach>
+ </select>-->
+
+ <select id="getMaxLayByParent" resultType="String">
+    select max(company_layrec)
+    from tbase_company where company_parentid=#{company_parentid}
+ </select>
+
+    <select id="findByName"  parameterType="string" resultType="com.ifrabbit.nk.usercenter.domain.Company">
+        select * from tbase_company where company_name like CONCAT('%',#{companyName},'%')
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultType="com.ifrabbit.nk.usercenter.domain.Company">
+        select * from tbase_company where company_id=#{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.Role">
+
+  <sql id="SELECT_CONDITION_INNER">
+    <if test="_condition.userId != null">
+      and role.id in
+      (select sysrltn_mainid from tbase_sysrltn where sysrltn_type='1' and sysrltn_assistid = #{_condition.userId,jdbcType=VARCHAR})
+    </if>
+    <if test="_condition.menuId != null">
+      and role.id in
+      (select sysrltn_mainid from tbase_sysrltn where sysrltn_type='2' and sysrltn_assistid = #{_condition.menuId,jdbcType=VARCHAR})
+    </if>
+  </sql>
+
+</mapper>

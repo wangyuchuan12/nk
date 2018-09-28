@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.Problem">
+
+    <sql id="SELECT_CONDITION_INNER">
+        <choose>
+        <when test="_condition.fuzzyStartTime!= null and _condition.fuzzyEndTime!=null">
+           and `problem`.problemparts_createdate
+            between #{_condition.fuzzyStartTime}
+            and #{_condition.fuzzyEndTime}
+        </when>
+        </choose>
+    </sql>
+</mapper>

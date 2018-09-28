@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.quertz.domain.Balance">
+    <insert id="insertBalance">
+        insert into tmanage_balance(balance_tabid,balance_companyid,balance_companyname,balance_companycode,balance_date,balance_amount,balance_originalown,balance_originalsum,balance_payee,balacne_own,balance_credit,balance_state,balance_memo)
+        values ( #{balanceTabid},#{balanceCompanyid},#{balanceCompanyname},#{balanceCompanycode},#{balanceDate},#{balanceAmount},#{balanceOriginalown},#{balanceOriginalsum},#{balancePayee},#{balanceOwn},#{balanceCredit},#{balanceState},#{balanceMemo})
+    </insert>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.Dealinfo">
+
+
+    <select id="findTaskDetail"  parameterType="string" resultType="com.ifrabbit.nk.express.domain.Dealinfo">
+        select
+        appdeal_id as id,
+        appdeal_dealcreatedate as appdealDealcreatedate,
+        appdeal_record  as appdealRecord,
+        appdeal_result as appdealResult
+        from tapp_tabdealinfo
+        where appdeal_tabletype = #{processId} and appdeal_dealtype = '101'
+        order by appdeal_dealcreatedate desc
+    </select>
+
+</mapper>

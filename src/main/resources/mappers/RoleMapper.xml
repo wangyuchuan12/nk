@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.Role">
+
+    <insert id="insertRoleUser">
+    insert into tbase_sysrltn(sysrltn_mainid,sysrltn_assistid,sysrltn_type) values (#{roleId}, #{userId,jdbcType=VARCHAR},1)
+  </insert>
+
+    <delete id="deleteRoleUserByRoleId">
+    delete from tbase_sysrltn where sysrltn_type='1' and sysrltn_mainid = #{roleId,jdbcType=NUMERIC}
+  </delete>
+
+    <insert id="insertRoleMenu">
+    insert into tbase_sysrltn(sysrltn_mainid,sysrltn_assistid,sysrltn_type) values (#{roleId}, #{menuId,jdbcType=NUMERIC},2)
+  </insert>
+
+    <delete id="deleteRoleMenuByRoleId">
+    delete from tbase_sysrltn where sysrltn_type='2' and sysrltn_mainid = #{roleId,jdbcType=NUMERIC}
+  </delete>
+
+    <delete id="deleteRoleGroupByRoleId">
+    delete from uc_role_group where role_id = #{roleId,jdbcType=NUMERIC}
+  </delete>
+
+    <insert id="insertRoleGroup">
+      insert into uc_role_group(role_id,group_id) values (#{roleId}, #{groupId,jdbcType=NUMERIC})
+  </insert>
+
+    <delete id="deleteRoleOperateByRoleId">
+    delete from uc_role_operate where role_id = #{roleId,jdbcType=NUMERIC}
+  </delete>
+
+    <insert id="insertRoleOperate">
+    insert into uc_role_operate(role_id,operate_id) values (#{roleId}, #{operateId,jdbcType=NUMERIC})
+  </insert>
+
+</mapper>

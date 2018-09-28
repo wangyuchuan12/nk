@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.ExpressInfoRecord">
+
+    <!--SunJiaJian-->
+    <select id="findByExpressNumber" parameterType="java.lang.String" resultType="com.ifrabbit.nk.express.domain.ExpressInfoRecord">
+        select * from ex_info_record where express_number = #{expressNumber,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteExpressNumber" parameterType="java.lang.String">
+        delete from ex_info_record where express_number = #{expressNumber,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="selectExpressTasks" resultType="com.ifrabbit.nk.express.domain.ExpressInfoRecord">
+        select c.id ,
+            c.express_taskid,
+            c.express_dealtype,
+            c.express_nodename,
+            c.express_state,
+            c.express_ipaddress,
+            c.express_type,
+            c.express_number,
+            c.express_problemid,
+            c.express_modal,
+            c.express_processinstanceid,
+            c.express_plantime,
+            c.express_querytime,
+            c.express_dealid,
+            c.express_tabid
+            from ex_info_record c
+            where c.express_state = 0
+            and NOW() > c.express_plantime
+            <if test="expressInfoRecord.express_ipaddress != null and expressInfoRecord.express_ipaddress !=''">
+                AND  c.express_ipaddress = #{expressInfoRecord.express_ipaddress,jdbcType=VARCHAR}
+            </if>
+            LIMIT #{page.page},#{page.size};
+    </select>
+</mapper>

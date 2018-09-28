@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.JobList">
+
+
+
+
+
+    <select id="findAllByMySelf" parameterType="org.springframework.data.domain.Pageable" resultType="com.ifrabbit.nk.usercenter.domain.JobList">
+        select tb.joblist_projectid as 'projectid'
+        ,tp.problemparts_expressnumber as 'expressnumber'
+        ,tp.problemparts_submitterphone as 'submitterphone'
+        ,tp.problemparts_type as 'type'
+        ,tp.problemparts_createdate as 'createdate'
+from tapp_joblist as tb,tapp_problemparts as tp where tb.joblist_problempartsid = tp.id
+
+
+    </select>
+
+
+</mapper>

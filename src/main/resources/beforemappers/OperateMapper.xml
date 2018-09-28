@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.Operate">
+
+  <sql id="SELECT_CONDITION_INNER">
+    <if test="_condition.roleId != null">
+      and `operate`.id in (
+      select ro.operate_id from uc_role_operate ro where ro.role_id = #{_condition.roleId,jdbcType=NUMERIC}
+      )
+
+    </if>
+  </sql>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.Staff">
+
+  <insert id="insertRoleUser">
+    insert into tbase_sysrltn(sysrltn_mainid,sysrltn_assistid,sysrltn_type) values (#{roleId}, #{userId,jdbcType=VARCHAR},1)
+  </insert>
+
+  <delete id="deleteRoleUserByUserId">
+    delete from tbase_sysrltn where sysrltn_type='1' and sysrltn_assistid = #{userId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insertGroupUser">
+    insert into uc_group_user(group_id,user_id) values (#{groupId}, #{userId,jdbcType=VARCHAR})
+  </insert>
+
+  <delete id="deleteGroupUserByUserId">
+    delete from uc_group_user where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+</mapper>

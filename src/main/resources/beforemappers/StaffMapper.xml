@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.Staff">
+
+  <sql id="SELECT_CONDITION_INNER">
+    <if test="_condition.roleId != null">
+      and staff_id in
+      (select sysrltn_assistid from tbase_sysrltn where sysrltn_type='1' and sysrltn_mainid = #{_condition.roleId,jdbcType=NUMERIC})
+    </if>
+    <if test="_condition.groupId != null">
+      and staff_id in
+      (select staff_id from uc_group_user where staff_id = #{_condition.groupId,jdbcType=NUMERIC})
+    </if>
+  </sql>
+
+</mapper>

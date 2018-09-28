@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.Waybill">
+
+  <sql id="SELECT_CONDITION_INNER">
+    <if test="_condition.fuzzyCustomerName != null">
+      and `waybill.customer`.name like concat('%',#{_condition.fuzzyCustomerName},'%')
+    </if>
+    <!--<if test="_condition.fuzzyCompanyName != null">
+      and `waybill.company`.name like concat('%',#{_condition.fuzzyCompanyName},'%')
+    </if>-->
+  </sql>
+
+
+</mapper>

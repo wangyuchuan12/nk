@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.Menu">
+
+  <sql id="SELECT_CONDITION_INNER">
+    <if test="_condition.userId != null">
+      and `menu`.menuinfo_id in (
+        select rm.sysrltn_assistid from tbase_sysrltn rm where rm.sysrltn_type='2' and rm.sysrltn_mainid in (
+          select ru.sysrltn_mainid from tbase_sysrltn ru where ru.sysrltn_type='1' and ru.sysrltn_assistid = #{_condition.userId,jdbcType=VARCHAR}
+        )
+      )
+    </if>
+    <if test="_condition.roleId != null">
+      and `menu`.menuinfo_id in (
+        select rm.sysrltn_assistid from tbase_sysrltn rm where rm.sysrltn_type='2' and rm.sysrltn_mainid = #{_condition.roleId,jdbcType=NUMERIC}
+      )
+
+    </if>
+  </sql>
+
+</mapper>

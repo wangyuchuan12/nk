@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.UfloTask">
+
+    <!--SunJiaJian-->
+    <select id="findById" parameterType="java.lang.Long" resultType="com.ifrabbit.nk.usercenter.domain.UfloTask">
+        select * from UFLO_TASK where PROCESS_INSTANCE_ID_ = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findByProcessId"
+            parameterType="map"
+            resultType="map">
+        SELECT ut.ID_ FROM UFLO_TASK ut WHERE ut.PROCESS_INSTANCE_ID_= #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--<delete id="deleteExpressNumber" parameterType="java.lang.String">-->
+        <!--delete from ex_info_detail where express_number = #{expressNumber,jdbcType=VARCHAR}-->
+    <!--</delete>-->
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.usercenter.domain.UserReport">
+
+  <!--暂时不弄中间表-->
+  <!--<insert id="insertUserReportCompany">-->
+    <!--insert into uc_role_user(role_id,user_id) values (#{roleId}, #{userId,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+
+  <!--<delete id="deleteUserReportById">-->
+    <!--delete from tbase_userreport where userreport_id = #{userreportId}-->
+  <!--</delete>-->
+
+  <!--<insert id="insertGroupUser">-->
+    <!--insert into tbase_userreport(group_id,user_id) values (#{groupId}, #{userId,jdbcType=VARCHAR})-->
+  <!--</insert>-->
+
+  <!--<delete id="deleteGroupUserByUserId">-->
+    <!--delete from uc_group_user where user_id = #{userId,jdbcType=VARCHAR}-->
+  <!--</delete>-->
+
+
+  <select id="findByAnswer"  resultType="com.ifrabbit.nk.usercenter.domain.UserReport">
+      select * from tbase_userreport where code like CONCAT('%A%')
+  </select>
+
+    <select id="findByUserReport"  parameterType="long" resultType="com.ifrabbit.nk.usercenter.domain.UserReport">
+       select * from tbase_userreport t
+       where t.id in (select sysrltn_mainid from tbase_sysrltn where sysrltn_type='3' and sysrltn_assistid = #{mainId})
+    </select>
+
+    <delete id="deleteSysRLtnId">
+        delete from tbase_sysrltn where sysrltn_type='3' and sysrltn_assistid = #{mainId}
+    </delete>
+
+
+</mapper>

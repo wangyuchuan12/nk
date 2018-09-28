@@ -1,0 +1,21 @@
+variables:
+  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+stages:
+  - build
+  - deploy
+
+build_job:
+  stage: build
+  script:
+    - 'mvn $MAVEN_CLI_OPTS clean package -U'
+  except:
+    - tags
+
+deploy_to_registry:
+  stage: deploy
+  script:
+    - 'mvn $MAVEN_CLI_OPTS clean package docker:build -DpushImage -U'
+  only:
+    - master
+  when: manual

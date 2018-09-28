@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.CallDetail">
+    <select id="selectCallTasks" resultType="com.ifrabbit.nk.express.domain.CallDetail">
+        select c.calldetail_id as id,
+            c.calldetail_tableid,
+            c.calldetail_dealid,
+            c.calldetail_phonenumber,
+            c.calldetail_name,
+            c.calldetail_expressnumber ,
+            c.calldetail_expressnumber,
+            c.calldetail_content
+            from tapp_calldetail c
+            where c.calldetail_ivrid = #{callDeatil.calldetail_ivrid}
+            and c.calldetail_state= #{callDeatil.calldetail_state,jdbcType=INTEGER}
+            and c.mwordlevel_varparama = #{callDeatil.mwordlevel_varparama}
+            and  NOW() > c.calldetail_time
+            LIMIT #{page.page},#{page.size};
+    </select>
+</mapper>

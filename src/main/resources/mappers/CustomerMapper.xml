@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ifrabbit.nk.express.domain.Customer">
+
+ <select id="countCustomersWaybill" resultType="com.ifrabbit.nk.express.domain.Customer">
+   select customer_id as id,count(*) as waybillCount from ex_waybill group by customer_id
+   having customer_id in
+   <foreach collection="customerIds" separator="," open="(" close=")" item="id">
+     #{id}
+   </foreach>
+ </select>
+
+</mapper>

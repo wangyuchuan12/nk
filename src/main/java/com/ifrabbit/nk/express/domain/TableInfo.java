@@ -33,6 +33,7 @@ public class TableInfo implements Serializable {
     private Integer tableinfo_dealstate;//表单的状态，1处理中，0结束
     private String tableinfo_content;
     @Condition
+    @Column(name="tableinfo_uptableid")
     private Long tableinfo_uptabid;//父表单的tableInfo主键ID
     //当前任务节点ID
     @Condition

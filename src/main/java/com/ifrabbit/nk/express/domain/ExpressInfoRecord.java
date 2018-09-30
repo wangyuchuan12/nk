@@ -3,9 +3,7 @@ package com.ifrabbit.nk.express.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mybatis.annotations.Condition;
-import org.springframework.data.mybatis.annotations.Conditions;
-import org.springframework.data.mybatis.annotations.Entity;
+import org.springframework.data.mybatis.annotations.*;
 import org.springframework.data.mybatis.domains.LongId;
 import org.springframework.data.repository.query.parser.Part;
 
@@ -24,7 +22,11 @@ import static org.springframework.data.repository.query.parser.Part.Type.SIMPLE_
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(table = "ex_info_record")
-public class ExpressInfoRecord extends LongId {
+public class ExpressInfoRecord {
+    @Id
+    @Column(name="express_id")
+    private Long id;
+
     @Condition
     private String  express_number;//运单号
     @Condition
@@ -69,10 +71,12 @@ public class ExpressInfoRecord extends LongId {
     private Long express_dealid;//dealInfo表的主键ID
 
     @Condition
+    @Column(name = "express_tableid")
     private Long express_tabid;//tableInfo表的主键ID
 
     private String express_errorcompanyname;//错误网点名
 
+    @Column(name = "express_interfacestate")
     @Condition
     private Integer interface_state;//物流接口状态 1正常，2超时，0不完整
     private String  area_varchar1;//字符备用字段

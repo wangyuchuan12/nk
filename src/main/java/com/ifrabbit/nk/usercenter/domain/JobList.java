@@ -19,7 +19,10 @@ import static org.springframework.data.repository.query.parser.Part.Type.*;
 @NoArgsConstructor
 @Entity(table = "tapp_joblist")
 @Getter
-public class JobList extends LongId implements Serializable {
+public class JobList implements Serializable {
+    @Id
+    @Column(name="joblist_id")
+    private Long id;
 
     private Long joblistProblemid;//问题件主键ID
 

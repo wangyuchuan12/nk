@@ -3,9 +3,7 @@ package com.ifrabbit.nk.express.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mybatis.annotations.Condition;
-import org.springframework.data.mybatis.annotations.Conditions;
-import org.springframework.data.mybatis.annotations.Entity;
+import org.springframework.data.mybatis.annotations.*;
 import org.springframework.data.mybatis.domains.LongId;
 
 import java.util.Date;
@@ -22,35 +20,33 @@ import static org.springframework.data.repository.query.parser.Part.Type.CONTAIN
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(table = "ex_info_detail")
-public class ExpressInfoDetail extends LongId {
+public class ExpressInfoDetail {
+    @Id
+    @Column(name="interface_id")
+    private Long id;
 
-    /**
-     * `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-     * `express_number` varchar(64) NOT NULL DEFAULT '' COMMENT '运单号',
-     * `express_detaildate` date NOT NULL DEFAULT '0000-00-00' COMMENT '物流记录时间',
-     * `express_detailtype` smallint(6) NOT NULL DEFAULT '0' COMMENT '物流明细类型 ：类型分为：1=揽收，2=运输中，3=派件中，4=已签收',
-     * `begin_companyid` varchar(64) NOT NULL DEFAULT '' COMMENT '起始站点ID',
-     * `begin_companyname` varchar(200) NOT NULL DEFAULT '' COMMENT '起始站点名称',
-     * `begin_companytype` smallint(6) NOT NULL DEFAULT '0' COMMENT '起始企业类型 类型分为：1为派件网点，2为分拨中心',
-     * `end_companyid` varchar(64) NOT NULL DEFAULT '' COMMENT '终止站点ID',
-     * `end_companyname` varchar(200) NOT NULL DEFAULT '' COMMENT '终止站点名称',
-     * `end_companytype` smallint(6) NOT NULL DEFAULT '0' COMMENT '终止企业类型 类型分为：1为派件网点，2为分拨中心',
-     * `is_lastdetail` smallint(6) DEFAULT NULL COMMENT '是否最末条记录 0为否 1为是',
-     * `area_varchar1` varchar(255) DEFAULT NULL COMMENT '字符备用字段',
-     * `area_int1` bigint(20) DEFAULT NULL COMMENT '数字备用字段',
-     * `area_float1` float DEFAULT NULL COMMENT '浮点备用字段',
-     */
-
+    @Column(name="interface_id")
     private String express_number;//运单号
 
+    private Long express_id;//对应recordid
+
+    @Column(name="interface_expressdetaildate")
     private String express_detaildate;//物流记录时间
+    @Column(name="interface_expressdetailtype")
     private Integer express_detailtype;//物流明细类型
+    @Column(name="interface_begincompanyid")
     private String begin_companyid;//起始站点ID
+    @Column(name="interface_begincompanyname")
     private String begin_companyname;//起始站点名称
+    @Column(name="interface_begincompanytype")
     private Integer begin_companytype;//起始企业类型
+    @Column(name="interface_endcompanyid")
     private String end_companyid;//终止站点ID
+    @Column(name="interface_endcompanyname")
     private String end_companyname;//终止站点名称
+    @Column(name="interface_endcompanytype")
     private Integer end_companytype;//终止企业类型
+    @Column(name="interface_islastdetail")
     private Integer is_lastdetail;//是否最末条记录
 
     private String area_varchar1;//字符备用字段 现在存放物流更新时间用来比较物流是否更新

@@ -365,14 +365,6 @@ public class ExpressInfoDetailServiceImpl
                         expressInfoRecord.setInterface_state(0);
                     }
 
-
-                    //因为update暂时无法使用，先用delete再insert代替
-                    expressInfoDetailRepository.deleteExpressNumber(expressNumber);
-                    int size2 = detailList.size();
-                    for (int i = 0; i < size2; i++) {
-                        expressInfoDetailRepository.insert(detailList.get(i));
-                    }
-
                     logger.info("\n");
                     logger.info("\n");
                     logger.info("++++++++++++++++++++++++++++++++++最早物流信息时间+++++++++++++++++++++++++++++++++");
@@ -419,6 +411,15 @@ public class ExpressInfoDetailServiceImpl
                 }
                 //更新或者插入record
                 updateOrInsertExpressInfoRecord(expressInfoRecord, taskID);
+
+                //因为update暂时无法使用，先用delete再insert代替
+                expressInfoDetailRepository.deleteExpressNumber(expressNumber);
+                int size2 = detailList.size();
+                for (int i = 0; i < size2; i++) {
+                    ExpressInfoDetail expressInfoDetail = detailList.get(i);
+                    expressInfoDetail.setExpressrecord_id(expressInfoRecord.getId());
+                    expressInfoDetailRepository.insert(detailList.get(i));
+                }
             }
         }
         if(analysisType ==3) {

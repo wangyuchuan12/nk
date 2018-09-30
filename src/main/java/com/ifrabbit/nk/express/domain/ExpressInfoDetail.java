@@ -48,6 +48,8 @@ public class ExpressInfoDetail {
     private Integer end_companytype;//终止企业类型
     @Column(name="interface_islastdetail")
     private Integer is_lastdetail;//是否最末条记录
+    @Column(name = "express_id")
+    private Long expressrecord_id;
 
     private String area_varchar1;//字符备用字段 现在存放物流更新时间用来比较物流是否更新
     private Integer area_int1;//数字备用字段
